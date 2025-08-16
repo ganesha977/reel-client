@@ -2,9 +2,9 @@ import React from 'react'
 import Feed from './Feed'
 import { Outlet } from 'react-router-dom'
 import RightSidebar from './RightSidebar'
-import UseGetAllPosts from '@/hooks/UseGetAllPosts'
 import useGetSuggestedUsers from '@/hooks/useGetSuggestedUsers'
 import useGetAllReels from '@/hooks/useGetAllReels'
+import UseGetAllPosts from '@/hooks/UseGetAllposts'
 
 const Home = () => {
     UseGetAllPosts();
