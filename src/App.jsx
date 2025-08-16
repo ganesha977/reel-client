@@ -9,7 +9,7 @@ import ChatPage from './components/ChatPage';
 import { io } from 'socket.io-client';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { setSocket } from './redux/socketSlice';
+import { setSocket } from './redux/SocketSlice';
 import { setOnlineUsers } from './redux/chatSlice';
 import { setLikeNotification } from './redux/rtnSlice';
 import { setMessageNotification } from './redux/messageNotificationSlice';
