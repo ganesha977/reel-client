@@ -28,7 +28,7 @@ const Signup = () => {
     try {
       setLoading(true)
       const res = await axios.post(
-        "http://localhost:7777/api/v1/user/register",
+        "https://social-media-server-3ykc.onrender.com/api/v1/user/register",
         input,
         {
           headers: {
@@ -72,13 +72,12 @@ useEffect(() => {
         onSubmit={signuphandler}
         className="shadow-lg flex flex-col gap-5 p-8"
       >
-        <div className="my-4">
-          <h1 className="text-center font-bold text-xl">LOGO</h1>
-          <p className="text-sm text-center">
-            Signup to see photos & videos from your friends
-          </p>
-        </div>
-
+        <div className="my-4 flex flex-col items-center">
+    <img src="/logo.png" alt="Logo" className="w-24 h-24 mb-2" />
+    <p className="text-sm text-center">
+      Signup to see photos & videos from your friends
+    </p>
+  </div>
         <div>
           <span className="font-medium">Username</span>
           <Input

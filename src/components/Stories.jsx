@@ -63,7 +63,7 @@ const Stories = () => {
   };
 
   return (
-    <div className="w-full bg-white border-b border-gray-200">
+    <div className="w-full ">
       <div className="max-w-[935px] mx-auto px-5">
         <div
           className="flex gap-4 overflow-x-auto scroll-smooth py-4"

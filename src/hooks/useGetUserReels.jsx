@@ -7,7 +7,7 @@ const useGetUserReels = (userId) => {
   useEffect(() => {
     const fetchReels = async () => {
       try {
-        const res = await axios.get(`http://localhost:7777/api/v1/reels/user/${userId}`, {
+        const res = await axios.get(`https://social-media-server-3ykc.onrender.com/api/v1/reels/user/${userId}`, {
           withCredentials: true,
         });
         setUserReels(res.data.reels || []);

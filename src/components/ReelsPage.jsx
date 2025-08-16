@@ -192,7 +192,7 @@ const ReelsPage = () => {
     const action = liked ? "dislike" : "like";
     try {
       const res = await axios.post(
-        `http://localhost:7777/api/v1/reel/${action}/${reel._id}`,
+        `https://social-media-server-3ykc.onrender.com/api/v1/reel/${action}/${reel._id}`,
         {},
         { withCredentials: true }
       );
@@ -218,7 +218,7 @@ const ReelsPage = () => {
   const commentHandler = async (reel, text) => {
     try {
       const res = await axios.post(
-        `http://localhost:7777/api/v1/reel/comment/${reel._id}`,
+        `https://social-media-server-3ykc.onrender.com/api/v1/reel/comment/${reel._id}`,
         { text },
         {
           headers: { 'Content-Type': 'application/json' },
@@ -243,7 +243,7 @@ const ReelsPage = () => {
   const bookmarkHandler = async (reel) => {
     try {
       const res = await axios.get(
-        `http://localhost:7777/api/v1/reel/${reel._id}/bookmark`,
+        `https://social-media-server-3ykc.onrender.com/api/v1/reel/${reel._id}/bookmark`,
         { withCredentials: true }
       );
       if (res.data.success) toast.success(res.data.message);

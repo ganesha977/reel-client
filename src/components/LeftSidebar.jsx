@@ -16,7 +16,6 @@ import { setAuthUser } from '@/redux/authSlice';
 import CreatePost from './CreatePost';
 import { setPosts, setSelectedPost } from '@/redux/postSlice';
 import { Button } from './ui/button';
-import { clearLikeNotifications } from '@/redux/rtnSlice';
 import { clearMessageNotifications } from '@/redux/messageNotificationSlice';
 
 const LeftSidebar = () => {
@@ -31,7 +30,7 @@ const LeftSidebar = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get('http://localhost:7777/api/v1/user/logout', {
+      const res = await axios.get('https://social-media-server-3ykc.onrender.com/api/v1/user/logout', {
         withCredentials: true,
       });
       if (res.data.success) {
