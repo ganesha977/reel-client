@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
-import useGetUserProfile from '@/hooks/useGetUserProfile';
 import { Link, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { Button } from './ui/button';
@@ -8,6 +7,7 @@ import { Badge } from './ui/badge';
 import { AtSign, Heart, MessageCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import axios from 'axios';
+import useGetUserProfile from '@/hooks/UseGetUserProfile';
 
 const Profile = () => {
   const { id: userId } = useParams();
