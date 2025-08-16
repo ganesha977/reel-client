@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import authSlice from "./authSlice";
-import socketSlice from "./socketSlice";
+import socketSlice from "./SocketSlice";
 import postSlice from "./postSlice";
 import chatSlice from './chatSlice';
 import rtnSlice from './rtnSlice';
