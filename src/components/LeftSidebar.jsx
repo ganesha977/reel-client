@@ -63,7 +63,7 @@ const LeftSidebar = () => {
     } else if (textType === 'Notifications') {
       navigate('/notifications');
     } else if (textType === 'Reels') {
-      navigate('/ureel');
+      navigate('/reelspage');
     }
   };
 
