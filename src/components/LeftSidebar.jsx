@@ -3,8 +3,7 @@ import {
   Home,
   LogOut,
   MessageCircle,
-  PlusSquare,
-  Search
+  PlusSquare
 } from 'lucide-react';
 import React, { useState } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar';
@@ -17,11 +16,13 @@ import CreatePost from './CreatePost';
 import { setPosts, setSelectedPost } from '@/redux/postSlice';
 import { Button } from './ui/button';
 import { clearMessageNotifications } from '@/redux/messageNotificationSlice';
+import { Dialog, DialogContent } from './ui/dialog';
 
 const LeftSidebar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [open, setOpen] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [postOpen, setPostOpen] = useState(false);     
   const location = useLocation();
 
   const { user } = useSelector((store) => store.auth);
@@ -49,7 +50,7 @@ const LeftSidebar = () => {
     if (textType === 'Logout') {
       logoutHandler();
     } else if (textType === 'Create') {
-      setOpen(true);
+      setDialogOpen(true);
     } else if (textType === 'Profile') {
       navigate(`/profile/${user?._id}`);
     } else if (textType === 'Home') {
@@ -62,15 +63,12 @@ const LeftSidebar = () => {
     } else if (textType === 'Notifications') {
       navigate('/notifications');
     } else if (textType === 'Reels') {
-      navigate('/reelspage');
-    } else if (textType === 'Search') {
       navigate('/ureel');
     }
   };
 
   const sidebarItems = [
     { icon: <Home />, text: 'Home' },
-    { icon: <Search />, text: 'Search' },
     {
       icon: (
         <img
@@ -97,9 +95,7 @@ const LeftSidebar = () => {
 
   return (
     <>
-      {/* Desktop Sidebar */}
       <div className="hidden lg:flex fixed top-0 z-10 left-0 px-4 border-r border-gray-300 w-[20%] h-screen">
-        
         <div className="flex flex-col w-full justify-between">
           <div>
             <h1 className="my-8 pl-3 font-bold text-xl">PINGME</h1>
@@ -141,7 +137,6 @@ const LeftSidebar = () => {
             })}
           </div>
 
-          {/* Logout at the bottom */}
           <div className="mb-6">
             <div
               onClick={() => sidebarHandler('Logout')}
@@ -154,78 +149,92 @@ const LeftSidebar = () => {
         </div>
       </div>
 
-    {/* Mobile Bottom Navigation */}
-<div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-300">
-  <div className="flex items-center justify-around py-2 px-4">
-    {sidebarItems
-      .filter((item) =>
-        ['Home', 'Search', 'Reels', 'Messages'].includes(item.text)
-      )
-      .map((item, index) => {
-        const isMessageNotification = item.text === 'Messages';
-        const showMessageBadge = isMessageNotification && messageNotification?.length > 0;
+      <div className="lg:hidden fixed bottom-0 left-0 right-0 z-50 bg-white border-t border-gray-300">
+        <div className="flex items-center justify-around py-2 px-4">
+          {sidebarItems
+            .filter((item) =>
+              ['Home', 'Reels', 'Messages'].includes(item.text)
+            )
+            .map((item, index) => {
+              const isMessageNotification = item.text === 'Messages';
+              const showMessageBadge = isMessageNotification && messageNotification?.length > 0;
 
-        return (
+              return (
+                <div
+                  onClick={() => sidebarHandler(item.text)}
+                  key={index}
+                  className="flex flex-col items-center gap-1 relative cursor-pointer p-2"
+                >
+                  <div className="relative">
+                    {item.icon}
+                    {showMessageBadge && (
+                      <div className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs">
+                        {messageNotification.length}
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-xs">{item.text}</span>
+                </div>
+              );
+            })}
+
           <div
-            onClick={() => sidebarHandler(item.text)}
-            key={index}
-            className="flex flex-col items-center gap-1 relative cursor-pointer p-2"
+            onClick={() => sidebarHandler('Profile')}
+            className="flex flex-col items-center gap-1 cursor-pointer p-2"
           >
-            <div className="relative">
-              {item.icon}
-              {showMessageBadge && (
+            <Avatar className="w-6 h-6">
+              <AvatarImage src={user?.profilePicture} alt="profile" />
+              <AvatarFallback>CN</AvatarFallback>
+            </Avatar>
+            <span className="text-xs">Profile</span>
+          </div>
+        </div>
+      </div>
+
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-300 px-4 py-3">
+        <div className="flex items-center justify-between">
+          <h1 className="font-bold text-xl">Instagram</h1>
+          <div className="flex items-center gap-4">
+            <PlusSquare className="cursor-pointer" onClick={() => setDialogOpen(true)} />
+            <div className="relative cursor-pointer" onClick={() => sidebarHandler('Notifications')}>
+              <Heart />
+              {likeNotification.length > 0 && (
                 <div className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs">
-                  {messageNotification.length}
+                  {likeNotification.length}
                 </div>
               )}
             </div>
-            <span className="text-xs">{item.text}</span>
-          </div>
-        );
-      })}
 
-    {/* Profile icon for mobile */}
-    <div
-      onClick={() => sidebarHandler('Profile')}
-      className="flex flex-col items-center gap-1 cursor-pointer p-2"
-    >
-      <Avatar className="w-6 h-6">
-        <AvatarImage src={user?.profilePicture} alt="profile" />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
-      <span className="text-xs">Profile</span>
-    </div>
-  </div>
-</div>
-    
-
-      {/* Mobile Top Header */}
-<div className="lg:hidden fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-300 px-4 py-3">
-  <div className="flex items-center justify-between">
-    <h1 className="font-bold text-xl">Instagram</h1>
-    <div className="flex items-center gap-4">
-      <PlusSquare className="cursor-pointer" onClick={() => setOpen(true)} />
-      <div className="relative cursor-pointer" onClick={() => sidebarHandler('Notifications')}>
-        <Heart />
-        {likeNotification.length > 0 && (
-          <div className="absolute -top-2 -right-2 bg-red-600 text-white rounded-full h-4 w-4 flex items-center justify-center text-xs">
-            {likeNotification.length}
+            <LogOut
+              className="cursor-pointer"
+              onClick={() => sidebarHandler('Logout')}
+            />
           </div>
-        )}
+        </div>
       </div>
 
-       <LogOut
-        className="cursor-pointer"
-        onClick={() => sidebarHandler('Logout')}
-      />
-    </div>
-  </div>
-</div>
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="flex flex-col gap-4">
+          <Button
+            onClick={() => {
+              setDialogOpen(false);
+              navigate('/ureel');
+            }}
+          >
+            Upload Reel
+          </Button>
+          <Button
+            onClick={() => {
+              setDialogOpen(false);
+              setPostOpen(true);
+            }}
+          >
+            Create Post
+          </Button>
+        </DialogContent>
+      </Dialog>
 
-
-
-
-      <CreatePost open={open} setOpen={setOpen} />
+      <CreatePost open={postOpen} setOpen={setPostOpen} />
     </>
   );
 };
