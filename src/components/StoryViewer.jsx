@@ -7,20 +7,24 @@ import { useSelector } from "react-redux";
 const StoryViewer = () => {
   const { username } = useParams();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.auth); // logged-in user
+  const { user } = useSelector((state) => state.auth);
 
   const [stories, setStories] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [progress, setProgress] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchStories = async () => {
       try {
+        setLoading(true);
         const { data } = await getUserStories(username);
         setStories(data.stories || []);
       } catch (err) {
         console.error("Error fetching user stories:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchStories();
@@ -76,10 +80,24 @@ const StoryViewer = () => {
     }
   };
 
+  // ⏳ Loading skeleton (Instagram style)
+  if (loading) {
+    return (
+      <div className="fixed inset-0 z-50 bg-black/90 flex items-center justify-center">
+        <div className="flex flex-col items-center gap-4 animate-pulse">
+          <div className="w-16 h-16 rounded-full bg-gray-600"></div>
+          <div className="w-40 h-4 bg-gray-600 rounded"></div>
+          <div className="w-64 h-96 bg-gray-700 rounded-lg"></div>
+        </div>
+      </div>
+    );
+  }
+
+  // 🟣 If no stories exist after loading
   if (!story) {
     return (
       <div className="h-screen flex items-center justify-center bg-black text-white text-lg">
-        Story not found
+        No stories available
       </div>
     );
   }
@@ -124,7 +142,6 @@ const StoryViewer = () => {
             <button onClick={handleClose} className="text-white">
               <X size={24} />
             </button>
-            {/* Show delete button only if logged-in user is author */}
             {user?._id === story.author._id && (
               <button
                 onClick={() => handleDelete(story._id)}
@@ -152,7 +169,7 @@ const StoryViewer = () => {
           />
         )}
 
-        {/* Navigation zones (for desktop & mobile tap) */}
+        {/* Navigation zones */}
         <div
           className="absolute left-0 top-0 w-1/3 h-full cursor-pointer"
           onClick={handlePrev}
