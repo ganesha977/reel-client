@@ -10,7 +10,7 @@ const useGetAllStories = (userId) => {
   useEffect(() => {
     const fetchUserStories = async () => {
       try {
-        const res = await axios.get(`https://social-media-server-3ykc.onrender.com/api/v1/story/user/${userId}`, {
+        const res = await axios.get(`https://reel-server.onrender.com/api/v1/story/user/${userId}`, {
           withCredentials: true,
         });
         dispatch(setUserStories(res.data.stories));

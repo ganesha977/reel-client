@@ -33,7 +33,7 @@ const UploadReel = () => {
 
     try {
       setUploading(true);
-      const res = await axios.post("https://social-media-server-3ykc.onrender.com/api/v1/reel/add", formData, {
+      const res = await axios.post("https://reel-server.onrender.com/api/v1/reel/add", formData, {
         withCredentials: true,
         headers: { "Content-Type": "multipart/form-data" },
         onUploadProgress: (e) =>

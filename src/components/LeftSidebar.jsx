@@ -30,7 +30,7 @@ const LeftSidebar = () => {
 
   const logoutHandler = async () => {
     try {
-      const res = await axios.get('https://social-media-server-3ykc.onrender.com/api/v1/user/logout', {
+      const res = await axios.get('https://reel-server.onrender.com/api/v1/user/logout', {
         withCredentials: true,
       });
       if (res.data.success) {

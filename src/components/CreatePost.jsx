@@ -43,7 +43,7 @@ const CreatePost = ({ open, setOpen }) => {
     try {
       console.log(file, caption);
       const res = await axios.post(
-        "https://social-media-server-3ykc.onrender.com/api/v1/post/addpost",
+        "https://reel-server.onrender.com/api/v1/post/addpost",
         formdata,
         {
           headers: {

@@ -62,7 +62,7 @@ function App() {
 
   useEffect(() => {
     if (user) {
-      const socketio = io('https://social-media-server-3ykc.onrender.com', {
+      const socketio = io('https://reel-server.onrender.com', {
         query: { userId: user?._id },
         transports: ['websocket']
       });

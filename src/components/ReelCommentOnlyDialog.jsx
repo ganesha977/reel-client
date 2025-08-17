@@ -21,7 +21,7 @@ const ReelCommentOnlyDialog = ({ open, setOpen }) => {
     if (!text.trim()) return;
     try {
       const res = await axios.post(
-        `https://social-media-server-3ykc.onrender.com/api/v1/reel/comment/${selectedReel._id}`,
+        `https://reel-server.onrender.com/api/v1/reel/comment/${selectedReel._id}`,
         { text },
         { headers: { 'Content-Type': 'application/json' }, withCredentials: true }
       );
@@ -46,7 +46,7 @@ const ReelCommentOnlyDialog = ({ open, setOpen }) => {
   const handleDeleteReel = async () => {
     try {
       const res = await axios.delete(
-        `https://social-media-server-3ykc.onrender.com/api/v1/reel/${selectedReel._id}`,
+        `https://reel-server.onrender.com/api/v1/reel/${selectedReel._id}`,
         { withCredentials: true }
       );
       if (res.data.success) {

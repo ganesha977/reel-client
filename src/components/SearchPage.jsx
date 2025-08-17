@@ -19,7 +19,7 @@ const SearchPage = () => {
     setLoading(true);
     try {
       const res = await axios.get(
-        `https://social-media-server-3ykc.onrender.com/api/v1/user/search?query=${query}`,
+        `https://reel-server.onrender.com/api/v1/user/search?query=${query}`,
         { withCredentials: true }
       );
       if (res.data.success) {
@@ -41,7 +41,7 @@ const SearchPage = () => {
   const handleFollowOrUnfollow = async (targetUserId) => {
     try {
       const res = await axios.post(
-        `https://social-media-server-3ykc.onrender.com/api/v1/user/followorunfollow/${targetUserId}`,
+        `https://reel-server.onrender.com/api/v1/user/followorunfollow/${targetUserId}`,
         {},
         { withCredentials: true }
       );

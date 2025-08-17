@@ -25,7 +25,7 @@ if (!textMessage.trim()) return;
 
 
   const res = await axios.post(
-    `https://social-media-server-3ykc.onrender.com/api/v1/message/send/${receiverId}`,
+    `https://reel-server.onrender.com/api/v1/message/send/${receiverId}`,
     { textMessage },
     {
       headers: {

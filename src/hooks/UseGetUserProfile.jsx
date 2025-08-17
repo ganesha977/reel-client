@@ -10,7 +10,7 @@ const useGetUserProfile = (userId) => {
     const fetchUserProfile = async () => {
       try {
         const res = await axios.get(
-          `https://social-media-server-3ykc.onrender.com/api/v1/user/${userId}/profile`,
+          `https://reel-server.onrender.com/api/v1/user/${userId}/profile`,
           { withCredentials: true }
         );
 

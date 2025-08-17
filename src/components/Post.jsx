@@ -38,7 +38,7 @@ const Post = ({ post }) => {
   const handleFollowOrUnfollow = async () => {
     try {
       const res = await axios.post(
-        `https://social-media-server-3ykc.onrender.com/api/v1/user/followorunfollow/${post?.author?._id}`,
+        `https://reel-server.onrender.com/api/v1/user/followorunfollow/${post?.author?._id}`,
         {},
         { withCredentials: true }
       );
@@ -55,7 +55,7 @@ const Post = ({ post }) => {
   const deletePostHandeler = async () => {
     try {
       const res = await axios.delete(
-        `https://social-media-server-3ykc.onrender.com/api/v1/post/delete/${post?._id}`,
+        `https://reel-server.onrender.com/api/v1/post/delete/${post?._id}`,
         { withCredentials: true }
       );
       if (res.data.success) {
@@ -79,7 +79,7 @@ const Post = ({ post }) => {
     try {
       const action = liked ? "dislike" : "like";
       const res = await axios.post(
-        `https://social-media-server-3ykc.onrender.com/api/v1/post/${post._id}/${action}`,
+        `https://reel-server.onrender.com/api/v1/post/${post._id}/${action}`,
         {},
         { withCredentials: true }
       );
@@ -112,7 +112,7 @@ const Post = ({ post }) => {
   const commentHandler = async () => {
     try {
       const res = await axios.post(
-        `https://social-media-server-3ykc.onrender.com/api/v1/post/${post._id}/comment`,
+        `https://reel-server.onrender.com/api/v1/post/${post._id}/comment`,
         { text },
         {
           headers: { "Content-Type": "application/json" },
@@ -139,7 +139,7 @@ const Post = ({ post }) => {
   const bookmarkhandler = async () => {
     try {
       const res = await axios.get(
-        `https://social-media-server-3ykc.onrender.com/api/v1/post/${post?._id}/bookmark`,
+        `https://reel-server.onrender.com/api/v1/post/${post?._id}/bookmark`,
         { withCredentials: true }
       );
       if (res.data.success) {

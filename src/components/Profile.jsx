@@ -28,7 +28,7 @@ const Profile = () => {
   const handleFollowOrUnfollow = async () => {
     try {
       const res = await axios.post(
-        `https://social-media-server-3ykc.onrender.com/api/v1/user/followorunfollow/${userProfile?._id}`,
+        `https://reel-server.onrender.com/api/v1/user/followorunfollow/${userProfile?._id}`,
         {},
         { withCredentials: true }
       );
