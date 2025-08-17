@@ -140,8 +140,8 @@ const Profile = () => {
             ))}
           </div>
 
-          {/* Content Grid */}
-          <div className="grid grid-cols-3 gap-0.5 sm:gap-1 mt-4">
+          
+          <div className="grid grid-cols-3 gap-0.5 sm:gap-1 mt-4  ml-9">
             {displayedPost?.length > 0 ? (
               displayedPost.map(item => (
                 <div key={item._id} className="relative group cursor-pointer">
