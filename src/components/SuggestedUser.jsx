@@ -40,7 +40,7 @@ const SuggestedUsers = () => {
 
   if (!suggestedUsers || suggestedUsers.length === 0) {
     return (
-      <div className="hidden md:block my-10 w-full max-w-xs text-sm text-gray-500">
+      <div className="hidden md:block my-10 w-full max-w-xs text-sm text-gray-500 ">
         No suggested users
       </div>
     );

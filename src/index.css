@@ -68,6 +68,8 @@
 }
 
 
+
+
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;
@@ -76,6 +78,4 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
-
-  
 }

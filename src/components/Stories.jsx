@@ -33,7 +33,6 @@ const Stories = () => {
     fetchStories();
   }, [viewedStories]);
 
-  // Upload
   const handleUpload = async () => {
     if (!file) return alert("Please select an image or video");
     const formData = new FormData();
@@ -53,7 +52,6 @@ const Stories = () => {
     }
   };
 
-  // Mark story as viewed
   const handleStoryClick = (storyId) => {
     if (!viewedStories.includes(storyId)) {
       const updated = [...viewedStories, storyId];
@@ -63,13 +61,10 @@ const Stories = () => {
   };
 
   return (
-    <div className="w-full ">
+    <div className="w-full">
       <div className="max-w-[935px] mx-auto px-5">
-        <div
-          className="flex gap-4 overflow-x-auto scroll-smooth py-4"
-          style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-        >
-          {/* Upload (Your Story) */}
+          <div className="flex gap-4 overflow-x-auto scroll-smooth py-4 scrollbar-hide">
+
           <div className="flex flex-col items-center shrink-0">
             <label className="relative cursor-pointer group">
               <div className="w-[66px] h-[66px] rounded-full p-[2.5px] bg-gradient-to-br from-gray-300 via-gray-200 to-gray-300 group-hover:scale-105 transition-all duration-300 ease-out">
@@ -110,17 +105,18 @@ const Stories = () => {
               Your Story
             </p>
 
-            {file && !loading && (
-              <button
-                onClick={handleUpload}
-                className="mt-1 px-2 py-0.5 bg-blue-500 text-white text-xs rounded-md hover:bg-blue-600"
-              >
-                Upload
-              </button>
-            )}
+            <div className="h-6 flex items-center">
+              {file && !loading && (
+                <button
+                  onClick={handleUpload}
+                  className="px-2 py-0.5 bg-blue-500 text-white text-xs rounded-md hover:bg-blue-600"
+                >
+                  Upload
+                </button>
+              )}
+            </div>
           </div>
 
-          {/* Stories */}
           {stories.map((story) => {
             const isViewed = viewedStories.includes(story._id);
 
@@ -135,8 +131,8 @@ const Stories = () => {
                   <div
                     className={`w-[66px] h-[66px] rounded-full p-[2.5px] ${
                       isViewed
-                        ? "bg-gray-300" 
-                        : "bg-gradient-to-br from-purple-600 via-pink-500 via-red-500 to-yellow-400" // unviewed → colorful ring
+                        ? "bg-gray-300"
+                        : "bg-gradient-to-br from-purple-600 via-pink-500 via-red-500 to-yellow-400"
                     } group-hover:scale-105 transition-all duration-300 ease-out`}
                   >
                     <div className="w-full h-full rounded-full p-[2.5px] bg-white">
@@ -155,9 +151,17 @@ const Stories = () => {
             );
           })}
         </div>
-
-        <style>{`div::-webkit-scrollbar { display: none; }`}</style>
       </div>
+
+      <style>{`
+       .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+      `}</style>
     </div>
   );
 };
